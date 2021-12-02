@@ -1,4 +1,5 @@
 import os
+import django_heroku
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -121,3 +122,6 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'noobcoders321@gmail.com'
 EMAIL_HOST_PASSWORD = 'noobcoders@123'
+
+
+django_heroku.settings(locals())
