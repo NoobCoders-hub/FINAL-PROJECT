@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% block content %}
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand">I-Care</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+          <ul class="nav navbar-nav navbar-right">
+            <li>
+              <button class="button">
+                <a href="{% url 'home' %}">Back to Homepage</a>
+              </button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="jumbotron text-center">
+      <h1>SIGN UP</h1>
+      <p>Enter Your Details</p>
+    </div>
+    <div class="container-fluid">
+      <span class="mb-0 text-muted">
+         {% if msg %}
+         {{ msg | safe }}
+         {% else %}
+         Enter the Details in the Respective Fields
+         {% endif %}
+      </span>
+    <form method="post">
+      {% csrf_token %}
+      <div class="form-group first">
+        <label for="username">Username</label>
+        {{ form.username }}
+      </div>
+      <div class="form-group first">
+        <label for="first_name">First Name</label>
+        {{ form.first_name }}
+      </div>
+      <div class="form-group first">
+        <label for="last_name">Last Name</label>
+        {{ form.last_name }}
+      </div>
+      <div class="form-group first">
+        <label for="age">Age</label><br>
+        {{ form.age }}
+      </div>
+      <div class="form-group first">
+        <label for="gender">Gender</label><br>
+        {{ form.gender }}
+      </div>
+      <div class="form-group first">
+        <label for="email">Email</label>
+        {{ form.email}}
+      </div>
+      <div class="form-group last mb-4">
+        <label for="password">Password</label>
+        {{ form.password1 }}
+      </div>
+      <div class="form-group last mb-4">
+        <label for="password">confirm Password</label>
+        {{ form.password2 }}
+      </div>
+      <div class="d-flex mb-5 align-items-center">
+        <label class="control control--checkbox mb-0"><span class="caption">Patient</span>
+          {{ form.is_patient }}
+          <div class="control__indicator"></div>
+        </label>
+      </div>
+      <div class="d-flex mb-5 align-items-center">
+        <label class="control control--checkbox mb-0"><span class="caption">Doctor</span>
+          {{ form.is_doctor }}
+          <div class="control__indicator"></div>
+        </label>
+      </div>
+      <span class="text-error">{{ form.errors }}</span>
+      <div class="form-group">
+          <small class="text-muted ml-3" >Already have an account? <a href="{% url 'login_view' %}">Log In</a></small>
+      </div>
+      <input type="submit" value="Register" class="btn btn-lg">
+    </form>
+    </div>
+{% endblock %}

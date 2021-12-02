@@ -1,0 +1,194 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+  .check-container {
+    --form-theme-color: #00bcd4;
+    --form-bg-color: white;
+    --input-text-color: black;
+    --button-hover: #4e5050;
+    --input-bg-gray: #E2E5E5;
+    /* border: 7px solid var(--form-theme-color); */
+    font-size: 1em;
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--form-bg-color);
+    padding: 5px;
+    width: 700px;
+    margin: 0;
+    margin-top: 5px;
+}
+
+.check-container input[type="checkbox"] {
+    margin-left: 0px;
+    display: inline-block;
+    position: relative;
+    -webkit-appearance: none;
+    height: 2em;
+    width: 4em;
+    border-radius: 1.5em;
+    background-color: var(--input-bg-gray);
+    border: none;
+    background-clip: padding-box;
+    color: #919FAF;
+    vertical-align: middle;
+}
+
+.check-container input[type="checkbox"]::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 50%;
+    background-color: white;
+    border-radius: 100%;
+    border: 2px solid transparent;
+    -webkit-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+    background-clip: padding-box;
+    z-index: 2;
+}
+
+.check-container input[type="checkbox"]:focus,
+input[type="radio"]:focus {
+    color: white;
+    border: none;
+    border-color: transparent;
+    background-color: #919FAF;
+}
+
+.check-container input[type="checkbox"]:checked {
+    color: white;
+    background-color: #f4511e;
+    border-color: transparent;
+}
+
+.check-container input[type="checkbox"]:checked::before {
+    -webkit-transform: translateX(100%);
+    transform: translateX(100%);
+}
+.multi-selectbox{
+    width: 400px;
+    margin: 0;
+}
+.multi-selectbox select{
+    width: 100%;
+}
+</style>
+
+
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#myPage">I-Care</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav navbar-right">
+          <li><a href="{% url 'pprofile' %}">PROFILE PAGE</a></li>
+         <li><a href="{% url 'logout' %}">LOG OUT >>></a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="jumbotron text-center">
+  <h1>ASSESSMENT</h1>
+  <p>Enter Details In The Respective Fields Correctly</p>
+</div>
+{% if messages %}
+    <div class="card notification-card notification-invitation">
+        <div class="card-body">
+        {% for message in messages %}
+                <div class="card-title">{{message}} </div>
+            {% endfor %}
+        </div>
+      </div>
+
+    {% endif %}
+                <div class="container-fluid">
+                    <form class="container-fluid" method="POST" action="{% url 'assessment' %}">
+                    {% csrf_token %}
+                            <h3><strong>Mention your current Body Temperature Range!!!</strong></h3><br>
+                            <div class="multi-selectbox">
+                             <select name="Body_Temperature" id="Body_Temperature">
+                                <option>Click to Select</option>
+                                <option value="Very High">Very High</option>
+                                <option value="High">High</option>
+                                <option value="Low">Low</option>
+                                <option value="Normal">Normal</option>
+                             </select>
+                             </div>
+                            <br>
+                            <h3><strong>Check the corresponding boxes, If you have any Symptoms!!!</strong></h3><br>
+                            <div class="check-container">
+                                <input type="checkbox" id="Symptom1" name="Symptom1" value="Moderate to Medium cough">
+                                <label> Moderate to Medium cough</label><br><br>
+                                <input type="checkbox" id="Symptom2" name="Symptom2" value="Sneezing">
+                                <label> Sneezing</label><br><br>
+                                <input type="checkbox" id="Symptom3" name="Symptom3" value="Sore throat">
+                                <label> Sore throat</label><br><br>
+                                <input type="checkbox" id="Symptom4" name="Symptom4" value="weakness">
+                                <label> Weakness</label><br><br>
+                                <input type="checkbox" id="Symptom5" name="Symptom5" value="Breathless/Difficulty in  breathing">
+                                <label> Breathless/Difficulty in breathing</label><br><br>
+                                <input type="checkbox" id="Symptom6" name="Symptom6" value="Severe Body Pain">
+                                <label> Severe Body Pain</label><br><br>
+                                <input type="checkbox" id="Symptom7" name="Symptom7" value="No smell or taste sensation">
+                                <label> No smell or taste sensation</label><br><br>
+                                <input type="checkbox" id="Symptom8" name="Symptom8" value="Feeling drowsiness">
+                                <label> Feeling drowsiness</label><br><br>
+                                <input type="checkbox" id="Symptom9" name="Symptom9" value="No Symptoms">
+                                <label> No symptoms</label><br><br>
+                            </div><br>
+                        <h3><strong>Check the corresponding boxes, If you have any Medical History!!!</strong></h3><br>
+                            <div class="check-container">
+                                <input type="checkbox" id="Medical_History1" name="Medical_History1" value="Diabetes">
+                                <label> Diabetes</label><br><br>
+                                <input type="checkbox" id="Medical_History2" name="Medical_History2" value="Blood presure">
+                                <label> Blood presure</label><br><br>
+                                <input type="checkbox" id="Medical_History3" name="Medical_History3" value="Heart disease">
+                                <label> Heart disease</label><br><br>
+                                <input type="checkbox" id="Medical_History4" name="Medical_History4" value="Kidney disease">
+                                <label> Kidney disease</label><br><br>
+                                <input type="checkbox" id="Medical_History5" name="Medical_History5" value="No medical history">
+                                <label> No  medical history</label><br><br>
+                                <input type="checkbox" id="Medical_History6" name="Medical_History6" value="others">
+                                <label> Any others</label><br><br>
+                                <textarea class="form-control" id="Other_Medical_History" name="Other_Medical_History" placeholder="If you have checked any others in the above list, Mention it here!!!" rows="5"></textarea><br>
+                            </div>
+                            <h3><strong>Have you received a Vaccination Shot before?</strong></h3><br>
+                            <div class="multi-selectbox">
+                             <select name="Vaccinated" id="Vaccinated">
+                                <option>Click to Select</option>
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                             </select>
+                             </div>
+                            <br>
+                            <h3><strong>If Yes, then select the Vaccine you received!!!</strong></h3><br>
+                            <div class="multi-selectbox">
+                            <select name="Vaccine_Name" id="Vaccine_Name">
+                                <option>Click to Select</option>
+                                <option value="Moderna">Moderna</option>
+                                <option value="Pfizer-BioNtech">Pfizer-BioNtech</option>
+                                <option value="AstraZeneca">AstraZeneca</option>
+                                <option value="Johnson and Johnson">Johnson and Johnson</option>
+                            </select>
+                            </div>
+                            <br>
+                            <h3><strong>Additional Info</strong></h3><br>
+                            <div class="form-group first">
+                            <textarea class="form-control" id="Additional_Info" name="Additional_Info" placeholder="If you have something important regarding your health condition, Please mention it here!!!" rows="5"></textarea><br>
+                            </div><br>
+
+                        <div class="row justify-content-end">
+                            <div class="form-group col-sm-6"> <button type="submit" class="btn btn-lg">Submit</button> </div>
+                        </div>
+                    </form>
+                </div>
+
+{% endblock content %}

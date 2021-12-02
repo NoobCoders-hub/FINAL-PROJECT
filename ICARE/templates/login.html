@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#myPage">I-Care</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+          <button class="button">
+            <a href="{% url 'home' %}">Back to Homepage</a>
+          </button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="jumbotron text-center">
+  <h1>LOGIN</h1>
+  <p>Enter your Credentials to login!</p>
+</div>
+<div class="container-fluid">
+              <span class="mb-0 text-muted">
+                {% if msg %}
+                    {{ msg | safe }}
+                {% else %}
+                    Enter The Credentials to Login
+                {% endif %}
+              </span>
+                <form  method="post">
+                    {% csrf_token %}
+                  <div class="form-group first">
+                    <label for="username">Username</label>
+                      {{ form.username }}
+                  </div>
+                  <div class="form-group last mb-4">
+                    <label for="username">Password</label>
+                    {{ form.password }}
+                  </div>
+
+                  <div class="form-group">
+                    <small class="text-muted ml-3" >Don't have an account? <a href="{% url 'register' %}">Sign Up</a></small>
+                  </div>
+
+                  <input type="submit" value="Log In" class="btn btn-lg">
+                </form>
+
+</div>
+{% endblock %}

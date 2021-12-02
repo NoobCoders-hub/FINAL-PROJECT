@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+{% block content %}
+    <nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#myPage">I-Care</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#info">INFO</a></li>
+        <li><a href="#appts">APPOINTMENTS/ASSESSMENT</a></li>
+        <li><a href="#query">QUERY</a></li>
+        <li><a href="{% url 'logout' %}">LOG OUT >>></a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="jumbotron text-center">
+  <h1>MY PROFILE</h1>
+  <p>PROFILE TYPE : PATIENT</p>
+</div>
+{% if messages %}
+    <div class="card notification-card notification-invitation">
+        <div class="card-body">
+        {% for message in messages %}
+                <div class="card-title">{{message}} </div>
+            {% endfor %}
+        </div>
+      </div>
+    {% endif %}
+
+<div id="info" class="container-fluid">
+  <div class="row">
+    <div class="text-left">
+      <h2>MY INFO</h2><br>
+      <h3>Username: {{user.username}}</h3>
+      <h3>First Name: {{user.first_name}}</h3>
+      <h3>Last name: {{user.last_name}}</h3>
+      <h3>Email: {{user.email}}</h3>
+      <h3>Age: {{user.age}}</h3>
+      <h3>Gender: {{user.gender}}</h3>
+    </div>
+  </div>
+</div>
+
+<div id="appts" class="container-fluid">
+  <div class="text-left">
+    <h2>APPOINTMENTS/ASSESSMENT</h2>
+  </div>
+  <div class="row slideanim">
+    <div class="col-sm-6 col-xs-12">
+      <div class="panel panel-default text-center">
+        <div class="panel-heading">
+          <h1>Book An Appointment Now!!!!!</h1>
+        </div>
+        <div class="panel-footer">
+          <button class="btn btn-lg">
+            <a href="{% url 'pbookapt' %}">Click Here!</a>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6 col-xs-12">
+      <div class="panel panel-default text-center">
+        <div class="panel-heading">
+          <h1>Take An Assessment Now!!!</h1>
+        </div>
+        <div class="panel-footer">
+          <button class="btn btn-lg">
+             <a href="{% url 'assessment' %}">Click Here!</a>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="container-fluid bg-grey">
+  <div class="col-sm-4 col-xs-12">
+    <h2 class="text-left">CONTACT</h2><div class="row">
+      <p>Contact us, and we'll get back to you within 24 hours.</p>
+      <p><span class="glyphicon glyphicon-map-marker"></span> Montreal, QC, CA</p>
+      <p><span class="glyphicon glyphicon-phone"></span> +1 1234567890</p>
+      <p><span class="glyphicon glyphicon-envelope"></span> info@icare.com</p>
+  </div>
+  </div>
+
+     <div class="col-sm-8 col-xs-12">
+      <h2 class="text-center">May I Help You???</h2>
+      <h3 class="text-center"></h3>
+       <form method="post" action="{% url 'pprofile' %}">
+       {% csrf_token %}
+      <div class="row">
+        <div class="col-sm-6 form-group">
+          <input class="form-control" id="name" name="name" placeholder="Name" type="text" required>
+        </div>
+        <div class="col-sm-6 form-group">
+          <input class="form-control" id="email" name="email" placeholder="Email" type="email" required>
+        </div>
+      </div>
+      <textarea class="form-control" id="query" name="query" placeholder="If you have any queries, ask us here!!!" rows="5"></textarea><br>
+      <div class="row">
+        <div class="col-sm-12 form-group">
+          <button class="btn btn-lg" type="submit">Send</button>
+        </div>
+      </div>
+       </form>
+    </div>
+</div>
+{% endblock %}

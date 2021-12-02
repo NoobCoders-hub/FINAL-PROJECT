@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#myPage">I-Care</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#info">INFO</a></li>
+        <li><a href="#appts">APPOINTMENTS MANAGEMENT</a></li>
+        <li><a href="{% url 'logout' %}">LOG OUT >>></a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="jumbotron text-center">
+  <h1>MY PROFILE</h1>
+   <p>PROFILE TYPE : DOCTOR</p>
+</div>
+
+<div id="info" class="container-fluid">
+  <div class="row">
+    <div class="text-left">
+      <h2>MY INFO</h2><br>
+      <h3>Username: {{user.username}}</h3>
+      <h3>First Name: {{user.first_name}}</h3>
+      <h3>Last name: {{user.last_name}}</h3>
+      <h3>Email: {{user.email}}</h3>
+      <h3>Age: {{user.age}}</h3>
+      <h3>Gender: {{user.gender}}</h3>
+    </div>
+  </div>
+</div>
+
+<div id="appts" class="container-fluid">
+  <div class="text-left">
+    <h2>APPOINTMENTS MANAGEMENT</h2>
+  </div>
+  <div class="row slideanim">
+    <div class="col-sm-6 col-xs-12">
+      <div class="panel panel-default text-center">
+        <div class="panel-heading">
+          <h1>Manage New Appointments</h1>
+        </div>
+        <div class="panel-footer">
+          <button class="btn btn-lg">
+            <a href="{% url 'dmanageapt' %}">Click Here!</a>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6 col-xs-12">
+      <div class="panel panel-default text-center">
+        <div class="panel-heading">
+          <h1>View Existing Appointments</h1>
+        </div>
+        <div class="panel-footer">
+          <button class="btn btn-lg">
+             <a href="{% url 'dviewapt' %}">Click Here!</a>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
