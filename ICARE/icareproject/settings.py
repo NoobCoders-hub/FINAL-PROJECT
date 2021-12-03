@@ -1,5 +1,4 @@
 import os
-import django_heroku
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -14,7 +13,7 @@ SECRET_KEY = 'b_z73j80aa!3h9s+%ui*ii*bl%(cdw*w-tpukpqngcr7+!_dtw'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['https://git.heroku.com/noobcodersicare.git','127.0.0.1']
 
 # Application definition
 
@@ -122,6 +121,3 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'noobcoders321@gmail.com'
 EMAIL_HOST_PASSWORD = 'noobcoders@123'
-
-
-django_heroku.settings(locals())
